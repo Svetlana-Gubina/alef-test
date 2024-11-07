@@ -16,7 +16,7 @@ import MainFooter from "./components/MainFooter.vue"
   width: 100%;
   max-width: 100%;
   display: flex;
-  height: calc(100vh - 76px - 76px);
+  min-height: calc(100vh - 76px - 76px);
   flex: 1;
 }
 </style>

@@ -3,7 +3,7 @@ import { ref} from "vue";
 import type {Ref} from "vue";
 
 interface Person {
-  id: string;
+  id: number;
   name:string;
   age: number;
 }
@@ -13,10 +13,18 @@ interface User extends Person{
 }
 
 const user:Ref<User> = ref<User>({
-  id: "",
+  id: 0,
   name: "",
   age: 0,
-  kids: []
+  kids: [{
+    id: 1,
+    name: "Kid1",
+    age: 11
+  },{
+    id: 2,
+    name: "Kid2",
+    age: 12
+  }]
 })
 
 </script>
@@ -54,8 +62,8 @@ const user:Ref<User> = ref<User>({
       </div>
       <div v-if="user.kids.length" class="kids-inner">
         <p class="data-title">Дети (макс. 5)</p>
-        <ul>
-          <li v-for="kid in user.kids" :key="kid.id">
+        <ul class="kids-list">
+          <li class="kids-item" v-for="kid in user.kids" :key="kid.id">
             <div class="form-item">
               <label for="name">Имя</label>
               <input
@@ -72,7 +80,7 @@ const user:Ref<User> = ref<User>({
                 v-model="kid.age"
               />
             </div>
-            <button type="button">
+            <button class="remove-kid" type="button">
               Удалить
             </button>
           </li>
@@ -89,8 +97,6 @@ const user:Ref<User> = ref<User>({
   margin: 0 auto;
   padding: 0;
   margin-top: 27px;
-
-  outline: 2px solid hotpink;
 }
 
 .personal-data,
@@ -174,12 +180,12 @@ const user:Ref<User> = ref<User>({
   padding: 5px;
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  border: 1px solid #1111117A;
   margin-bottom: 10px;
 }
 
 .form-item label {
-  color: gray;
+  color: #1111117A;
   font-size: 13px;
   line-height: 1.5;
   padding: 0 7px;
@@ -192,11 +198,66 @@ const user:Ref<User> = ref<User>({
   padding: 2px 5px;
 }
 
+.kids-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  max-width: 100%;
+}
+
+.kids-item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.kids-item .form-item {
+  margin-right: 20px;
+  width: 260px;
+}
+
+.remove-kid {
+  border: none;
+  box-shadow: none;
+  padding: 5px;
+  background-color: transparent;
+  border-radius: 0;
+  color: var(--color-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: -12px;
+}
+
 @media (max-width: 768px) {
   .home {
     width: 100%;
     max-width: 100%;
     margin: 0 40px;
+
+    outline: 2px solid red;
+  }
+
+  .kids-item .form-item {
+    width: auto;
   }
 }
+
+ @media (max-width: 500px) {
+  .personal-data {
+    margin-bottom: 100px;
+  }
+
+  .kids-item  {
+    flex-wrap: wrap;
+  }
+
+  .add-kid {
+    top: -50px;
+  }
+} 
 </style>

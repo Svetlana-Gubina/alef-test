@@ -27,7 +27,7 @@
     align-items: center;
     padding: 22px 50px;
     min-height: 76px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #1111117A;
 }
 
 .logo {
