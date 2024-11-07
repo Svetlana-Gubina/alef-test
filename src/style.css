@@ -5,7 +5,7 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: #1111117Ascale;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -57,9 +57,7 @@ button {
   padding: 10px 20px;
   border-radius: 100px;
 }
-button:hover {
-  
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
