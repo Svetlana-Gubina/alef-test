@@ -13,11 +13,14 @@
   "dependencies": {
     "@vue/cli-plugin-typescript": "^3.0.0-alpha.11",
     "@vue/compiler-sfc": "^3.5.12",
+    "@vueuse/integrations": "^11.2.0",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.30.0",
+    "focus-trap": "^7.6.0",
     "pinia": "^2.2.6",
     "prettier": "^3.3.3",
+    "uuid": "^11.0.2",
     "vue": "^3.5.12",
     "vue-router": "4.4.5"
   },

@@ -1,31 +1,15 @@
 <script setup lang="ts">
 import { ref} from "vue";
 import type {Ref} from "vue";
+import {useDataStore} from "../store/store";
+import { storeToRefs } from "pinia";
+import type {User} from "../interfaces/interfaces";
 
-interface Person {
-  id: number;
-  name:string;
-  age: number;
-}
+const store = useDataStore();
+const { userData } = storeToRefs(store);
 
-interface User extends Person{
-  kids: Person[]
-}
+const user:Ref<User> = ref<User>(userData.value);
 
-const user:Ref<User> = ref<User>({
-  id: 0,
-  name: "",
-  age: 0,
-  kids: [{
-    id: 1,
-    name: "Kid1",
-    age: 11
-  },{
-    id: 2,
-    name: "Kid2",
-    age: 12
-  }]
-})
 </script>
 
 <template>
@@ -33,7 +17,7 @@ const user:Ref<User> = ref<User>({
     <h1 class="sr-only">Просмотр данных</h1>
     <div class="preview-item item-personal">
         <p class="preview-title">Персональные данные</p>
-        <span>Ivan</span>,<span>50 лет</span>
+        <span>{{ user.name }}</span>,<span>{{ user.age }} лет</span>
     </div>
    <div class="preview-item">
         <p class="preview-title">Дети</p>
