@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import type { Ref } from 'vue';
-import type { User } from '../interfaces/interfaces';
-import { v4 as uuidv4 } from 'uuid';
+import { defineStore } from "pinia";
+import { ref } from "vue";
+import type { Ref } from "vue";
+import type { User } from "../interfaces/interfaces";
+import { v4 as uuidv4 } from "uuid";
 
-export const useDataStore = defineStore('data', () => {
+export const useDataStore = defineStore("data", () => {
   const defaultUser = {
     id: uuidv4(),
-    name: '',
+    name: "",
     age: 0,
     kids: [],
   };

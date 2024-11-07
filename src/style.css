@@ -1,6 +1,5 @@
 :root {
-  --color-primary: #01A7FD;
-  
+  --color-primary: #01a7fd;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,12 +20,11 @@ img {
 
 a {
   text-decoration: none;
-  color: #1111117A;
- 
+  color: #1111117a;
 }
 a:hover,
 a:focus {
- color: black;
+  color: black;
 }
 
 body {
@@ -63,14 +61,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 #app {
   width: 100%;
   max-width: 1366px;
   margin: 0 auto;
   min-height: 100vh;
 }
-
 
 .sr-only {
   border: 0 !important;

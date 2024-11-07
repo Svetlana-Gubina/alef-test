@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref} from "vue";
-import type {Ref} from "vue";
-import { v4 as uuidv4 } from 'uuid';
-import {useDataStore} from "../store/store";
+import { ref } from "vue";
+import type { Ref } from "vue";
+import { v4 as uuidv4 } from "uuid";
+import { useDataStore } from "../store/store";
 import { storeToRefs } from "pinia";
-import type {User, Person} from "../interfaces/interfaces";
+import type { User, Person } from "../interfaces/interfaces";
 import ModalComponent from "../components/ModalComponent.vue";
 
 const MAX_KIDS = 5;
@@ -17,9 +17,9 @@ const isRemoveModalOpened: Ref<boolean> = ref<boolean>(false);
 const isSaveModalOpened: Ref<boolean> = ref<boolean>(false);
 const itemIdToRemove: Ref<string> = ref<string>("");
 
-const user:Ref<User> = ref<User>(userData.value);
+const user: Ref<User> = ref<User>(userData.value);
 
-const onSaveData = ():void => {
+const onSaveData = (): void => {
   setData(user.value);
 
   openSaveModal();
@@ -27,45 +27,46 @@ const onSaveData = ():void => {
   setTimeout(() => {
     closeSaveModal();
   }, 1000);
-}  
+};
 
-const onAddKid = ():void => {
-  const newKid:Person = {
+const onAddKid = (): void => {
+  const newKid: Person = {
     id: uuidv4(),
     name: "",
     age: 0,
   };
 
-  if(user.value.kids.length >= MAX_KIDS) {
+  if (user.value.kids.length >= MAX_KIDS) {
     return;
   } else {
     user.value.kids = [...user.value.kids, newKid];
   }
-}
+};
 
-const onRemoveKid = ():void => {
+const onRemoveKid = (): void => {
   isRemoveModalOpened.value = false;
-  user.value.kids = user.value.kids.filter((kid) => kid.id !== itemIdToRemove.value);
-}
+  user.value.kids = user.value.kids.filter(
+    (kid) => kid.id !== itemIdToRemove.value,
+  );
+};
 
-const openRemoveModal = (kidId:string) => {
+const openRemoveModal = (kidId: string): void => {
   isRemoveModalOpened.value = true;
   itemIdToRemove.value = kidId;
 };
 
-const cancel = () => {
+const cancel = (): void => {
   isRemoveModalOpened.value = false;
   itemIdToRemove.value = "";
 };
 
-const openSaveModal = () => {
+const openSaveModal = (): void => {
   isSaveModalOpened.value = true;
 };
 
-const closeSaveModal = () => {
+const closeSaveModal = (): void => {
   isSaveModalOpened.value = false;
 };
-
 </script>
 
 <template>
@@ -103,28 +104,31 @@ const closeSaveModal = () => {
       <div class="personal-data">
         <p class="data-title">Персональные данные</p>
         <div class="form-item">
-        <label for="name">Имя</label>
-        <input
-          type="text"
-          id="name"
-          v-model="user.name"
-        />
-      </div>
-      <div class="form-item">
-        <label for="age">Возраст</label>
-        <input
-          type="number"
-          id="age"
-          v-model="user.age"
-        />
-      </div>
+          <label for="name">Имя</label>
+          <input type="text" id="name" v-model="user.name" />
+        </div>
+        <div class="form-item">
+          <label for="age">Возраст</label>
+          <input type="number" id="age" v-model="user.age" />
+        </div>
       </div>
       <div class="kids-data">
         <button @click="onAddKid" class="add-kid" type="button">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.13332 10.8556C4.50125 10.8555 3.98887 11.3679 3.98887 12C3.98887 12.6321 4.50126 13.1445 5.13332 13.1445L10.8554 13.1445L10.8554 18.8668C10.8554 19.4989 11.3678 20.0113 11.9999 20.0113C12.632 20.0113 13.1444 19.4989 13.1444 18.8668L13.1443 13.1445L18.8667 13.1445C19.4988 13.1445 20.0112 12.6321 20.0112 12C20.0112 11.3679 19.4988 10.8556 18.8667 10.8556L13.1443 10.8556L13.1443 5.13338C13.1443 4.50132 12.632 3.98893 11.9999 3.98893C11.3678 3.98893 10.8554 4.50131 10.8554 5.13338L10.8554 10.8556L5.13332 10.8556Z"/>
-        </svg>
-        Добавить ребенка</button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M5.13332 10.8556C4.50125 10.8555 3.98887 11.3679 3.98887 12C3.98887 12.6321 4.50126 13.1445 5.13332 13.1445L10.8554 13.1445L10.8554 18.8668C10.8554 19.4989 11.3678 20.0113 11.9999 20.0113C12.632 20.0113 13.1444 19.4989 13.1444 18.8668L13.1443 13.1445L18.8667 13.1445C19.4988 13.1445 20.0112 12.6321 20.0112 12C20.0112 11.3679 19.4988 10.8556 18.8667 10.8556L13.1443 10.8556L13.1443 5.13338C13.1443 4.50132 12.632 3.98893 11.9999 3.98893C11.3678 3.98893 10.8554 4.50131 10.8554 5.13338L10.8554 10.8556L5.13332 10.8556Z"
+            />
+          </svg>
+          Добавить ребенка
+        </button>
       </div>
       <div v-if="user.kids.length" class="kids-inner">
         <p class="data-title">Дети (макс. 5)</p>
@@ -132,27 +136,25 @@ const closeSaveModal = () => {
           <li class="kids-item" v-for="kid in user.kids" :key="kid.id">
             <div class="form-item">
               <label for="name">Имя</label>
-              <input
-                type="text"
-                id="name"
-                v-model="kid.name"
-              />
+              <input type="text" id="name" v-model="kid.name" />
             </div>
             <div class="form-item">
               <label for="age">Возраст</label>
-              <input
-                type="number"
-                id="age"
-                v-model="kid.age"
-              />
+              <input type="number" id="age" v-model="kid.age" />
             </div>
-            <button @click="openRemoveModal(kid.id)" class="remove-kid" type="button">
+            <button
+              @click="openRemoveModal(kid.id)"
+              class="remove-kid"
+              type="button"
+            >
               Удалить
             </button>
           </li>
         </ul>
       </div>
-      <button @click.prevent="onSaveData" class="save" type="submit">Сохранить</button>
+      <button @click.prevent="onSaveData" class="save" type="submit">
+        Сохранить
+      </button>
     </form>
   </section>
 </template>
@@ -215,7 +217,7 @@ const closeSaveModal = () => {
 .save,
 .modal-footer button {
   color: #ffffff;
-  background-color:var(--color-primary);
+  background-color: var(--color-primary);
   border: none;
   box-shadow: none;
   display: flex;
@@ -250,12 +252,12 @@ const closeSaveModal = () => {
   padding: 5px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #1111117A;
+  border: 1px solid #1111117a;
   margin-bottom: 10px;
 }
 
 .form-item label {
-  color: #1111117A;
+  color: #1111117a;
   font-size: 13px;
   line-height: 1.5;
   padding: 0 7px;
@@ -342,17 +344,17 @@ const closeSaveModal = () => {
   }
 }
 
- @media (max-width: 500px) {
+@media (max-width: 500px) {
   .personal-data {
     margin-bottom: 100px;
   }
 
-  .kids-item  {
+  .kids-item {
     flex-wrap: wrap;
   }
 
   .add-kid {
     top: -50px;
   }
-} 
+}
 </style>
