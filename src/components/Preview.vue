@@ -4,6 +4,7 @@ import type { Ref } from "vue";
 import { useDataStore } from "../store/store";
 import { storeToRefs } from "pinia";
 import type { User } from "../interfaces/interfaces";
+import {parseAge} from "../utils";
 
 const store = useDataStore();
 const { userData } = storeToRefs(store);
@@ -17,14 +18,14 @@ const user: Ref<User> = ref<User>(userData.value);
     <div class="preview-item item-personal">
       <p class="preview-title">Персональные данные</p>
       <span>{{ user.name }}</span
-      >,<span>{{ user.age }} лет</span>
+      >,<span>{{ user.age }} {{ parseAge(user.age) }}</span>
     </div>
     <div class="preview-item">
       <p class="preview-title">Дети</p>
       <ul class="kids-list">
         <li class="kids-item" v-for="kid in user.kids" :key="kid.id">
           <span>{{ kid.name }}</span
-          >, <span>{{ kid.age }} лет</span>
+          >, <span>{{ kid.age }} {{ parseAge(kid.age) }}</span>
         </li>
       </ul>
     </div>
