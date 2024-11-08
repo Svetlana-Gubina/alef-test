@@ -2,31 +2,32 @@
 import { ref } from "vue";
 import type { Ref } from "vue";
 import { v4 as uuidv4 } from "uuid";
-import { useDataStore } from "../store/store";
-import { storeToRefs } from "pinia";
 import type { User, Person } from "../interfaces/interfaces";
 import ModalComponent from "../components/ModalComponent.vue";
 
 const MAX_KIDS = 5;
 
-const store = useDataStore();
-const { setData } = useDataStore();
-const { userData } = storeToRefs(store);
-
 const isRemoveModalOpened: Ref<boolean> = ref<boolean>(false);
 const isSaveModalOpened: Ref<boolean> = ref<boolean>(false);
 const itemIdToRemove: Ref<string> = ref<string>("");
 
-const user: Ref<User> = ref<User>(userData.value);
+const defaultUser: User= {
+    id: uuidv4(),
+    name: "",
+    age: 0,
+    kids: [],
+};
+
+const user: Ref<User> = ref<User>(JSON.parse(localStorage.getItem("userData") || '""') || defaultUser);
 
 const onSaveData = (): void => {
-  setData(user.value);
+  localStorage.setItem("userData", JSON.stringify(user.value));
 
   openSaveModal();
 
   setTimeout(() => {
     closeSaveModal();
-  }, 1000);
+  }, 2000);
 };
 
 const onAddKid = (): void => {

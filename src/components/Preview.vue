@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { Ref } from "vue";
-import { useDataStore } from "../store/store";
-import { storeToRefs } from "pinia";
 import type { User } from "../interfaces/interfaces";
 import {parseAge} from "../utils";
 
-const store = useDataStore();
-const { userData } = storeToRefs(store);
 
-const user: Ref<User> = ref<User>(userData.value);
+const user: Ref<User> = ref<User>(JSON.parse(localStorage.getItem("userData") || '""') );
 </script>
 
 <template>
@@ -17,8 +13,10 @@ const user: Ref<User> = ref<User>(userData.value);
     <h1 class="sr-only">Просмотр данных</h1>
     <div class="preview-item item-personal">
       <p class="preview-title">Персональные данные</p>
-      <span>{{ user.name }}</span
-      >,<span>{{ user.age }} {{ parseAge(user.age) }}</span>
+      <div v-if="user.name || user.age" class="wrapper">
+        <span>{{ user.name }}</span
+            >,<span>{{ user.age }} {{ parseAge(user.age) }}</span>
+      </div>
     </div>
     <div class="preview-item">
       <p class="preview-title">Дети</p>
@@ -39,6 +37,11 @@ const user: Ref<User> = ref<User>(userData.value);
   margin-left: 27.5%;
   padding: 0;
   margin-top: 10px;
+}
+
+.wrapper {
+  margin: 0;
+  padding: 0;
 }
 
 .preview-item {
