@@ -113,7 +113,7 @@ const closeSaveModal = (): void => {
         </div>
       </div>
       <div class="kids-data">
-        <button v-if="user.kids.length < 5" @click="onAddKid" class="add-kid" type="button">
+        <button v-if="user.kids.length < MAX_KIDS" @click="onAddKid" class="add-kid" type="button">
           <svg
             width="24"
             height="24"
