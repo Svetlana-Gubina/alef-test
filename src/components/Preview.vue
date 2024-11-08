@@ -15,7 +15,7 @@ const user: Ref<User> = ref<User>(JSON.parse(localStorage.getItem("userData") ||
       <p class="preview-title">Персональные данные</p>
       <div v-if="user.name || user.age" class="wrapper">
         <span>{{ user.name }}</span
-            >,<span>{{ user.age }} {{ parseAge(user.age) }}</span>
+            >, <span>{{ user.age }} {{ parseAge(user.age) }}</span>
       </div>
     </div>
     <div class="preview-item">
